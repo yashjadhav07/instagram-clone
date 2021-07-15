@@ -22,7 +22,7 @@ const SignUp  = ()=>{
                 name,
                 password,
                 email,
-                pic:"https://res.cloudinary.com/dbdnigrwr/image/upload/v1625901209/defaultpic_ydudez.jpg"
+                pic:"https://res.cloudinary.com/dbk3dftmx/image/upload/v1625901209/defaultpic_ydudez.jpg"
             })
         }).then(res=>res.json())
         .then(data=>{
