@@ -9,8 +9,7 @@ const {JWT_SECRET} = require('../config/keys')
 const requireLogin = require('../middleware/requireLogin')
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
-const {SENDGRID_API,EMAIL} = require('../config/keys')
-//
+const {SENDGRID_API,HOST} = require('../config/keys')
 
 
 const transporter = nodemailer.createTransport(sendgridTransport({
@@ -40,12 +39,6 @@ router.post('/signup',(req,res)=>{
 
             user.save()
             .then(user=>{
-                // transporter.sendMail({
-                //     to:user.email,
-                //     from:"no-reply@insta.com",
-                //     subject:"signup success",
-                //     html:"<h1>welcome to instagram</h1>"
-                // })
                 res.json({message:"saved successfully"})
             })
             .catch(err=>{
@@ -73,7 +66,6 @@ router.post('/signin',(req,res)=>{
         bcrypt.compare(password,savedUser.password)
         .then(doMatch=>{
             if(doMatch){
-                // res.json({message:"successfully signed in"})
                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
                console.log(token)
                const {_id,name,email,followers,following,pic} = savedUser
@@ -110,11 +102,11 @@ router.post('/reset-password',(req,res)=>{
                      subject:"password reset",
                      html:`
                      <p>You requested for password reset</p>
-                     <h5>click in this <a href="${EMAIL}/reset/${token}">link</a> to reset password</h5>
+                     <h5>click in this <a href="${HOST}/reset/${token}">link</a> to reset password</h5>
                      `
                  })
                  res.json({message:"check your email"})
-                 console.log("MAil Sent!!")
+                 console.log("Mail Sent!!")
              })
 
          })
