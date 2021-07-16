@@ -1,4 +1,4 @@
-import React,{useEffect,createContext,useReducer,useContext} from 'react';
+ import React,{useEffect,createContext,useReducer,useContext} from 'react';
 import NavBar from './components/Navbar'
 import "./App.css"
 import "react-toastify/dist/ReactToastify.css";
