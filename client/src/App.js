@@ -65,7 +65,6 @@ const Routing = ()=>{
 function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
-    //<ToastContainer autoClose={2000} closeButton={false} />
     <UserContext.Provider value={{state,dispatch}}>
       <BrowserRouter>
         <NavBar />

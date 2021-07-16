@@ -4,8 +4,9 @@
 //    module.exports = require('./dev')
 //}
 module.exports={
-    MONGOURI: "mongodb+srv://yashleo:neutrino1234@yashleo1018.vk7cp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    MONGOURI:"mongodb+srv://siddharth:8tPrBU5sszr4BtG@cluster0.iqs0h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     JWT_SECRET:"ewewewewer",
-    SENDGRID_API:"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",
-    EMAIL:""
+    SENDGRID_API:"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",
+    EMAIL:"http:localhost:3000"
+
 }

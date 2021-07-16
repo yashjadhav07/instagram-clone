@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import { FormWrapper } from "./authcard";
-import { toast } from "react-toastify";
 import logo from "./imgs/logo.png";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 const SignUp  = ()=>{
     const history = useHistory()
     const [name,setName] = useState("")
@@ -10,8 +13,8 @@ const SignUp  = ()=>{
     const [email,setEmail] = useState("")
     const uploadFields = async (e) =>{
       e.preventDefault();
-        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-            return toast.error("Invalid Email");
+        if(!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)){
+             return toast('INVALID EMAILID',{position: toast.POSITION.TOP_LEFT});
         }
         fetch("/signup",{
             method:"post",
@@ -22,17 +25,17 @@ const SignUp  = ()=>{
                 name,
                 password,
                 email,
-                pic:"https://res.cloudinary.com/dbdnigrwr/image/upload/v1625901209/defaultpic_ydudez.jpg"
+                pic:"https://res.cloudinary.com/dbk3dftmx/image/upload/v1625901209/defaultpic_ydudez.jpg"
             })
         }).then(res=>res.json())
         .then(data=>{
            if(data.error){
 
-              toast(data.error);
+              return toast(data.error,{position: toast.POSITION.TOP_LEFT})
            }
            else{
 
-               toast(data.message);
+                toast("SIGNUP SUCCESSFUL",{position: toast.POSITION.TOP_LEFT})
                history.push('/signin')
            }
         }).catch(err=>{

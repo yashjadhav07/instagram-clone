@@ -21,12 +21,12 @@ const Profile  = ()=>{
        if(image){
         const data = new FormData()
         data.append("file",image)
-        data.append("upload_preset","l6vl2fp9")
-        data.append("cloud_name","dbdnigrwr")
-        fetch("https://api.cloudinary.com/v1_1/dbdnigrwr/image/upload",{
-            method:"post",
-            body:data
-        })
+        data.append("upload_preset","insta-clone")
+       data.append("cloud_name","dbk3dftmx")
+       fetch("https://api.cloudinary.com/v1_1/dbk3dftmx/image/upload",{
+           method:"post",
+           body:data
+       })
         .then(res=>res.json())
         .then(data=>{
 
