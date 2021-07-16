@@ -1,10 +1,12 @@
 import React,{useState,useContext,} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
-import { toast } from "react-toastify";
 import { FormWrapper } from "./authcard";
 import logo from "./imgs/logo.png";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const SignIn  = ()=>{
     const {dispatch} = useContext(UserContext)
@@ -15,9 +17,9 @@ const SignIn  = ()=>{
     const PostData = async (e) =>{
       e.preventDefault();
 
-        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+        if(!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)){
 
-            return toast.error("Invalid Email");
+            return toast('INVALID EMAILID',{position: toast.POSITION.TOP_LEFT});
         }
         fetch("/signin",{
             method:"post",
@@ -33,14 +35,14 @@ const SignIn  = ()=>{
 
            if(data.error){
 
-              toast.error(data.error);
+              return toast(data.error,{position: toast.POSITION.TOP_LEFT})
            }
            else{
                localStorage.setItem("jwt",data.token)
                localStorage.setItem("user",JSON.stringify(data.user))
                dispatch({type:"USER",payload:data.user})
 
-               toast.success("Login successful");
+               toast("SIGNUP SUCCESSFUL",{position: toast.POSITION.TOP_LEFT})
                history.push('/myfollowingpost')
            }
         }).catch(err=>{

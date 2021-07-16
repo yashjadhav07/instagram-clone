@@ -1,4 +1,4 @@
-import React,{useEffect,createContext,useReducer,useContext} from 'react';
+ import React,{useEffect,createContext,useReducer,useContext} from 'react';
 import NavBar from './components/Navbar'
 import "./App.css"
 import "react-toastify/dist/ReactToastify.css";
@@ -65,7 +65,6 @@ const Routing = ()=>{
 function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
-    //<ToastContainer autoClose={2000} closeButton={false} />
     <UserContext.Provider value={{state,dispatch}}>
       <BrowserRouter>
         <NavBar />

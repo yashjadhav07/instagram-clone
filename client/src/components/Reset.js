@@ -1,13 +1,15 @@
 import React,{useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import M from 'materialize-css'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 const Reset  = ()=>{
     const history = useHistory()
     const [email,setEmail] = useState("")
     const PostData = ()=>{
-        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-            M.toast({html: "invalid email",classes:"#c62828 red darken-3"})
-            return
+        if(!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)){
+            return toast('INVALID EMAILID',{position: toast.POSITION.TOP_LEFT});
         }
         fetch('/reset-password',{
             method:"post",
@@ -20,10 +22,10 @@ const Reset  = ()=>{
         }).then(res=>res.json())
         .then(data=>{
            if(data.error){
-              M.toast({html: data.error,classes:"#c62828 red darken-3"})
+              return toast(data.error,{position: toast.POSITION.TOP_LEFT})
            }
            else{
-               M.toast({html:data.message,classes:"#43a047 green darken-1"})
+               toast("PLEASE CHECK YOUR MAIL",{position: toast.POSITION.TOP_LEFT})
                history.push('/signin')
            }
         }).catch(err=>{
