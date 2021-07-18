@@ -34,7 +34,7 @@ const Reset  = ()=>{
     }
    return (
       <div className="mycard">
-          <div className="card auth-card input-field">
+          <div className="card auth-card">
             <h2>Instagram</h2>
             <input
             type="text"
