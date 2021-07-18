@@ -2,7 +2,7 @@ import React,{useState,useContext,} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
 import { FormWrapper } from "./authcard";
-import logo from "./imgs/logo.png";
+import logo from "./imgs/images.png";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -54,7 +54,7 @@ const SignIn  = ()=>{
      <div className="container">
        <FormWrapper onSubmit={PostData}>
           <form>
-                <img className="logo" src={logo} alt="logo" />
+                <img style={{width: "280px", height: "70px"}} className="form-group" src={logo} alt="logo" />
 
                 <div className="form-group">
                     <h6 className="p-1 text-left">Email</h6>

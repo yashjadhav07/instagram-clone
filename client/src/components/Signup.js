@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import { FormWrapper } from "./authcard";
-import logo from "./imgs/logo.png";
+import logo from "./imgs/images.png";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
@@ -48,7 +48,7 @@ const SignUp  = ()=>{
     <div className="container">
       <FormWrapper onSubmit={uploadFields}>
          <form>
-               <img className="logo" src={logo} alt="logo" />
+               <img style={{width: "280px", height: "70px"}} className="form-group" src={logo} alt="logo" />
                <div className="form-group">
                  <h6 className = "p-1 text-left">Name</h6>
                    <input
