@@ -1,16 +1,38 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import {Link ,useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
 import { ExploreIcon } from "./Icons";
 import homelogo from "./imgs/home.png";
 import pluslogo from "./imgs/plus.png";
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button, Form, FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
 
 
 
 const NavBar = ()=>{
-
+     const [query,setQuery] = useState("")
+     const [ans,setAns] = useState([])
+     const temp=["sid","kid","pid"]
      const {state,dispatch} = useContext(UserContext)
+     useEffect(()=>{
+         var temp_q = query
+         if(temp_q=="") temp_q="-"
+         fetch('/search-users',{
+             method:"post",
+             headers:{
+                 "Content-Type":"application/json",
+                 "Authorization":"Bearer "+localStorage.getItem("jwt")
+             },
+             body:JSON.stringify({
+                 query:temp_q
+             })
+         }).then(res=>res.json())
+         .then(result=>{
+           setAns(result.user)
+           console.log(result)
+         }).catch(err=>{
+             console.log(err)
+         })
+       },[query])
      const history = useHistory()
       return(
           <Navbar collapseOnSelect fixed='top' expands='sm' bg='light' variant='dark'>
@@ -20,6 +42,28 @@ const NavBar = ()=>{
                 <Nav className="container-fluid">
                 { state ? (
                   <>
+                  <Nav.Item className="mc-auto">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Email"
+                    value={query}
+                    onChange={(e)=>setQuery(e.target.value)}
+                  />
+                  </Nav.Item>
+                  <Nav.Item className="mc-auto">
+                  <DropdownButton id="dropdown-basic-button" title="Search">
+                  {
+                    ans.map(item=>{
+                     return(
+                       <Dropdown.Item><Link to={item._id !== state._id?"/profile/"+item._id :"/profile" }>
+                         {item.email}</Link></Dropdown.Item>
+                     )
+                   }
+                   )
+                  }
+                  </DropdownButton>
+                  </Nav.Item>
                   <Nav.Item className="mc-auto">
                     <Nav.Link as={Link} to={state ? "/myfollowingpost" : "/signin"}>
                       <img
