@@ -78,6 +78,8 @@ const SignUp  = ()=>{
                        className="form-control"
                        placeholder="Enter password"
                        value={password}
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                       title="Must contain at least 1 number, 1 uppercase, and at least 6 or more characters"
                        onChange={(e)=>setPasword(e.target.value)}
                      />
                </div>

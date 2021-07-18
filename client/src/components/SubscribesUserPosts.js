@@ -6,6 +6,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
 const Home  = ()=>{
     const [data,setData] = useState([])
+    const [comment,setComment] = useState("")
     const {state} = useContext(UserContext)
     useEffect(()=>{
        fetch('/getsubpost',{
@@ -14,7 +15,6 @@ const Home  = ()=>{
            }
        }).then(res=>res.json())
        .then(result=>{
-           console.log(result)
            setData(result.posts)
        })
     },[data])
@@ -169,18 +169,28 @@ const Home  = ()=>{
                      <Card.Body style={{paddingTop: "10px", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "10px"}}>
                        <form onSubmit={(e)=>{
                            e.preventDefault()
-                           makeComment(e.target[0].value,item._id)
+                           makeComment(comment,item._id)
+                           setComment("")
                        }}>
                         <Row>
                           <Col style={{paddingTop: "3px", paddingLeft: "15px", paddingRight: "12px"}} sm={1}>
                             <CommentIcon/>
                           </Col>
-                          <Col style={{paddingLeft: "10px", paddingRight: "10px"}} sm={11}>
+                          <Col style={{paddingLeft: "10px", paddingRight: "10px"}} sm={9}>
                             <input
                               type="text"
                               className="form-control"
                               placeholder="Add a comment"
+                              value={comment}
+                              onChange={(e)=>setComment(e.target.value)}
                            />
+                          </Col>
+                          <Col style={{paddingLeft: "0px", paddingRight: "12px"}} sm={2}>
+                            <input
+                              type="submit"
+                              className="form-control btn btn-outline-success"
+                              value="Post"
+                            />
                           </Col>
                         </Row>
                        </form>

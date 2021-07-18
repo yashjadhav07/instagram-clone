@@ -42,7 +42,7 @@ const SignIn  = ()=>{
                localStorage.setItem("user",JSON.stringify(data.user))
                dispatch({type:"USER",payload:data.user})
 
-               toast("SIGNUP SUCCESSFUL",{position: toast.POSITION.TOP_LEFT})
+               toast("LOG IN SUCCESSFUL",{position: toast.POSITION.TOP_LEFT})
                history.push('/myfollowingpost')
            }
         }).catch(err=>{
