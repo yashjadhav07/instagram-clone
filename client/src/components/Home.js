@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
 import deletelogo from "./imgs/delete.png";
-import {Card, ListGroup, ListGroupItem, Row, Col} from "react-bootstrap"
-import {WhatsappShareButton, WhatsappIcon} from "react-share";
+import {Card, ListGroup, ListGroupItem, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
+import {WhatsappShareButton, WhatsappIcon,FacebookShareButton, FacebookIcon,EmailShareButton,EmailIcon} from "react-share";
 import classes from './WhatsAppStyles';
 
 const Home  = ()=>{
@@ -169,18 +169,40 @@ const Home  = ()=>{
                            ><HeartIcon/></i>
                            }
                          </Col>
-                         <Col style={{ paddingLeft: "5px"}} sm={9}>
+                         <Col style={{ paddingLeft: "5px"}} sm={8}>
                            <Card.Text>{item.likes.length}</Card.Text>
                          </Col>
                          <Col sm={2}>
-                           <WhatsappShareButton
-                             url={`http://localhost:3000/sharedpost/${item._id}`}
-                             title={"Hey look at this amazing post"}
-                             separator=":: "
-                             className={classes.socialMediaButton}
-                           >
-                             <WhatsappIcon size={36} />
-                           </WhatsappShareButton>
+                           <DropdownButton id="dropdown-basic-button" title="Share">
+                               <Dropdown.Item>
+                               <WhatsappShareButton
+                                 url={`http://localhost:3000/sharedpost/${item._id}`}
+                                 title={"Hey look at this amazing post"}
+                                 separator=":: "
+                                 className={classes.socialMediaButton}
+                               > <WhatsappIcon size={25} /> WhatsApp 
+                               </WhatsappShareButton>
+                               </Dropdown.Item>
+                               <Dropdown.Item>
+                               <EmailShareButton
+                                 url={`http://localhost:3000/sharedpost/${item._id}`}
+                                 title={"Hey look at this amazing post"}
+                                 separator=":: "
+                                 className={classes.socialMediaButton}
+                               > <EmailIcon size={25} /> Email
+                               </EmailShareButton>
+                               </Dropdown.Item>
+                               <Dropdown.Item>
+                               <FacebookShareButton
+                                 url={`http://localhost:3000/sharedpost/${item._id}`}
+                                 title={"Hey look at this amazing post"}
+                                 separator=":: "
+                                 className={classes.socialMediaButton}
+                               > <FacebookIcon size={25} /> Facebook
+                               </FacebookShareButton>
+                               </Dropdown.Item>
+                           </DropdownButton>
+
                          </Col>
                        </Row>
                      </Card.Body>
