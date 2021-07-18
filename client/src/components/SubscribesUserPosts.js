@@ -4,10 +4,14 @@ import {Link} from 'react-router-dom'
 import {Card, ListGroup, ListGroupItem, Row, Col} from "react-bootstrap"
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
+import {WhatsappShareButton, WhatsappIcon} from "react-share";
+import classes from './WhatsAppStyles';
+
 const Home  = ()=>{
     const [data,setData] = useState([])
     const [comment,setComment] = useState("")
     const {state} = useContext(UserContext)
+
     useEffect(()=>{
        fetch('/getsubpost',{
            headers:{
@@ -20,6 +24,7 @@ const Home  = ()=>{
     },[data])
 
     const likePost = (id)=>{
+      alert(id);
           fetch('/like',{
               method:"put",
               headers:{
@@ -144,8 +149,18 @@ const Home  = ()=>{
                            ><HeartIcon/></i>
                            }
                          </Col>
-                         <Col style={{ paddingLeft: "5px"}} sm={11}>
+                         <Col style={{ paddingLeft: "5px"}} sm={9}>
                            <Card.Text>{item.likes.length}</Card.Text>
+                         </Col>
+                         <Col sm={2}>
+                           <WhatsappShareButton
+                             url={`http://localhost:3000/sharedpost/${item._id}`}
+                             title={"Hey look at this amazing post"}
+                             separator=":: "
+                             className={classes.socialMediaButton}
+                           >
+                             <WhatsappIcon size={36} />
+                           </WhatsappShareButton>
                          </Col>
                        </Row>
                      </Card.Body>

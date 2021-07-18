@@ -31,6 +31,19 @@ router.get('/getsubpost',requireLogin,(req,res)=>{
     })
 })
 
+router.get('/post/:postId',requireLogin,(req,res)=>{
+  Post.findOne({_id:req.params.postId})
+  .populate("postedBy","_id name")
+  .populate("comments.postedBy","_id name")
+  .sort('-createdAt')
+  .then(post=>{
+    res.json({post})
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+})
+
 router.post('/createpost',requireLogin,(req,res)=>{
     const {title,body,pic} = req.body
     if(!title || !body || !pic){

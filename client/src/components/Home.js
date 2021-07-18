@@ -5,6 +5,8 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
 import deletelogo from "./imgs/delete.png";
 import {Card, ListGroup, ListGroupItem, Row, Col} from "react-bootstrap"
+import {WhatsappShareButton, WhatsappIcon} from "react-share";
+import classes from './WhatsAppStyles';
 
 const Home  = ()=>{
     const [data,setData] = useState([])
@@ -42,6 +44,7 @@ const Home  = ()=>{
                     return item
                 }
             })
+
             setData(newData)
           }).catch(err=>{
               console.log(err)
@@ -166,8 +169,18 @@ const Home  = ()=>{
                            ><HeartIcon/></i>
                            }
                          </Col>
-                         <Col style={{ paddingLeft: "5px"}} sm={11}>
+                         <Col style={{ paddingLeft: "5px"}} sm={9}>
                            <Card.Text>{item.likes.length}</Card.Text>
+                         </Col>
+                         <Col sm={2}>
+                           <WhatsappShareButton
+                             url={`http://localhost:3000/sharedpost/${item._id}`}
+                             title={"Hey look at this amazing post"}
+                             separator=":: "
+                             className={classes.socialMediaButton}
+                           >
+                             <WhatsappIcon size={36} />
+                           </WhatsappShareButton>
                          </Col>
                        </Row>
                      </Card.Body>
