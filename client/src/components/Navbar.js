@@ -94,7 +94,7 @@ const NavBar = ()=>{
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Email"
+                          placeholder="Search here.."
                           value={query}
                           onChange={(e)=>setQuery(e.target.value)}
                         />

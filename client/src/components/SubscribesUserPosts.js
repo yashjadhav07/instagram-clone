@@ -158,7 +158,7 @@ const Home  = ()=>{
                                <WhatsappShareButton
                                  url={`http://localhost:3000/sharedpost/${item._id}`}
                                  title={"Hey look at this amazing post"}
-                                 separator=":: "
+                                 separator=" "
                                  className={classes.socialMediaButton}
                                > <WhatsappIcon size={25} /> WhatsApp
                                </WhatsappShareButton>
@@ -166,8 +166,9 @@ const Home  = ()=>{
                                <Dropdown.Item>
                                <EmailShareButton
                                  url={`http://localhost:3000/sharedpost/${item._id}`}
-                                 title={"Hey look at this amazing post"}
-                                 separator=":: "
+                                 subject={"Hey look at this amazing post"}
+                                 body={"Your friend found this post intresting..."}
+                                 separator=" "
                                  className={classes.socialMediaButton}
                                > <EmailIcon size={25} /> Email
                                </EmailShareButton>
@@ -175,8 +176,8 @@ const Home  = ()=>{
                                <Dropdown.Item>
                                <FacebookShareButton
                                  url={`http://localhost:3000/sharedpost/${item._id}`}
-                                 title={"Hey look at this amazing post"}
-                                 separator=":: "
+                                 quote={"Hey look at this amazing post"}
+                                 hashtag="#InstaClone"
                                  className={classes.socialMediaButton}
                                > <FacebookIcon size={25} /> Facebook
                                </FacebookShareButton>
