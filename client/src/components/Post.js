@@ -2,6 +2,7 @@ import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../App'
 import {Link} from 'react-router-dom'
 import {useParams} from 'react-router-dom'
+import deletelogo from "./imgs/delete.png";
 import {Card, ListGroup, ListGroupItem, Row, Col} from "react-bootstrap"
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
@@ -99,15 +100,34 @@ const Post  = ()=>{
        <>
        <Card className="home-card" key={data._id}>
            <Card.Body style={{paddingTop: "0px", paddingLeft: "0px", paddingRight: "0px", paddingBottom: "0px"}}>
-             <Card.Header><Link to={data.postedBy._id !== state._id?"/profile/"+data.postedBy._id :"/profile"  }><h6 style={{marginBottom: "0px"}}>{data.postedBy.name}</h6></Link>
-               {
-               data.postedBy._id === state._id && <i style={{
-                   float:"right"
-               }}
-               onClick={()=>deletePost(data._id)
-               }
-               >delete</i>
-               }
+             <Card.Header style={{padding:"5px"}}>
+               <Row>
+                 <Col>
+                   <Link to={data.postedBy._id !== state._id?"/profile/"+data.postedBy._id :"/profile"  }>
+                     <h6 style={{marginBottom: "0px"}}>{data.postedBy.name}</h6>
+                   </Link>
+                 </Col>
+                 <Col>
+                   {
+                   data.postedBy._id === state._id && <i style={{
+                       float:"right"
+                   }}
+                   onClick={()=>deletePost(data._id)
+                   }
+                   ><img
+                     style={{
+                       width: "24px",
+                       height: "24px",
+                       objectFit: "cover",
+                       borderRadius: "12px",
+                       cursor: "pointer"
+                     }}
+                     src={deletelogo}
+                     alt="deletelogo"
+                   /></i>
+                   }
+                 </Col>
+               </Row>
              </Card.Header>
            </Card.Body>
          <Card.Img variant="top" src={data.photo} />
@@ -117,7 +137,6 @@ const Post  = ()=>{
                   {
                   data.likes.includes(state._id)
                   ?
-
                    <i onClick={()=>{unlikePost(data._id)}}
                     ><FilledHeartIcon/></i>
                   :
@@ -125,9 +144,10 @@ const Post  = ()=>{
                   ><HeartIcon/></i>
                   }
                 </Col>
-                <Col style={{ paddingLeft: "5px"}} sm={11}>
+                <Col style={{ paddingLeft: "5px"}} sm={9}>
                   <Card.Text>{data.likes.length}</Card.Text>
                 </Col>
+
               </Row>
             </Card.Body>
           <Card.Body style={{paddingTop: "5px", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "5px"}}>
@@ -141,7 +161,7 @@ const Post  = ()=>{
                   <ListGroupItem style={{paddingTop: "5px", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "5px"}} key={record._id}>
                     <span style={{fontWeight:"500", marginRight: "5px"}}>{record.postedBy.name}</span>
                     {record.text}
-                 </ListGroupItem>
+                  </ListGroupItem>
                   )
               })
           }
@@ -153,31 +173,31 @@ const Post  = ()=>{
                   makeComment(comment,data._id)
                   setComment("")
               }}>
-               <Row>
-                 <Col style={{paddingTop: "3px", paddingLeft: "15px", paddingRight: "12px"}} sm={1}>
-                   <CommentIcon/>
-                 </Col>
-                 <Col style={{paddingLeft: "10px", paddingRight: "10px"}} sm={9}>
-                   <input
-                     type="text"
-                     className="form-control"
-                     placeholder="Add a comment"
-                     value={comment}
-                     onChange={(e)=>setComment(e.target.value)}
+              <Row>
+                <Col style={{paddingTop: "3px", paddingLeft: "15px", paddingRight: "12px"}} sm={1}>
+                  <CommentIcon/>
+                </Col>
+                <Col style={{paddingLeft: "10px", paddingRight: "10px"}} sm={9}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Add a comment"
+                    value={comment}
+                    onChange={(e)=>setComment(e.target.value)}
+                 />
+                </Col>
+                <Col style={{paddingLeft: "0px", paddingRight: "12px"}} sm={2}>
+                  <input
+                    type="submit"
+                    className="form-control btn btn-outline-success"
+                    value="Post"
                   />
-                 </Col>
-                 <Col style={{paddingLeft: "0px", paddingRight: "12px"}} sm={2}>
-                   <input
-                     type="submit"
-                     className="form-control btn btn-outline-success"
-                     value="Post"
-                   />
-                 </Col>
-               </Row>
+                </Col>
+              </Row>
               </form>
             </Card.Body>
          </Card>
-       </>
+         </>
      ) : (
        <>
         Loading...
