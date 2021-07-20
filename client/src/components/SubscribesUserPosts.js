@@ -6,6 +6,8 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { FilledHeartIcon , HeartIcon , CommentIcon} from "./Icons";
 import {WhatsappShareButton, WhatsappIcon,FacebookShareButton, FacebookIcon,EmailShareButton,EmailIcon} from "react-share";
 import classes from './WhatsAppStyles';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import copylogo from './imgs/copy.png';
 
 const Home  = ()=>{
     const [data,setData] = useState([])
@@ -155,6 +157,19 @@ const Home  = ()=>{
                          <Col sm={2}>
                            <DropdownButton id="dropdown-basic-button" title="Share">
                                <Dropdown.Item>
+                                 <CopyToClipboard text={`http://localhost:3000/sharedpost/${item._id}`}>
+                                   <span>
+                                     <img
+                                     className={classes.socialMediaButton}
+                                     src={copylogo}
+                                     alt="copylogo"
+                                     />
+                                   Copy Link
+                                 </span>
+                                 </CopyToClipboard>
+
+                                 </Dropdown.Item>
+                              <Dropdown.Item>
                                <WhatsappShareButton
                                  url={`http://localhost:3000/sharedpost/${item._id}`}
                                  title={"Hey look at this amazing post"}

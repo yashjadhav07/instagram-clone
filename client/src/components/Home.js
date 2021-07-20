@@ -7,6 +7,8 @@ import deletelogo from "./imgs/delete.png";
 import {Card, ListGroup, ListGroupItem, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
 import {WhatsappShareButton, WhatsappIcon,FacebookShareButton, FacebookIcon,EmailShareButton,EmailIcon} from "react-share";
 import classes from './WhatsAppStyles';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import copylogo from './imgs/copy.png';
 
 const Home  = ()=>{
     const [data,setData] = useState([])
@@ -174,6 +176,19 @@ const Home  = ()=>{
                          </Col>
                          <Col sm={2}>
                            <DropdownButton id="dropdown-basic-button" title="Share">
+                             <Dropdown.Item>
+                               <CopyToClipboard text={`http://localhost:3000/sharedpost/${item._id}`}>
+                                 <span>
+                                   <img
+                                   className={classes.socialMediaButton}
+                                   src={copylogo}
+                                   alt="copylogo"
+                                   />
+                                 Copy Link
+                               </span>
+                               </CopyToClipboard>
+
+                               </Dropdown.Item>
                                <Dropdown.Item>
                                <WhatsappShareButton
                                  url={`http://localhost:3000/sharedpost/${item._id}`}
